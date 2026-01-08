@@ -1,14 +1,19 @@
 {
-  "name": "ai-assisted-text-classification",
+  "name": "@MdDilawarHossainFarid/ai-assisted-text-classification",
   "version": "1.0.0",
-  "description": "",
+  "description": "It is a backend service that classifies input text into categories like Complaint, Query,Feedback, or Other using an AI model.",
   "license": "ISC",
-  "author": "",
+  "author": "Md.DilawarHossainFarid",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon src/index.js"
   },
+  "keywords": ["ai", "text-classification", "nlp", "openai", "machine-learning"],
+"repository": {
+  "type": "git",
+  "url": "https://github.com/MdDilawarHossainFarid/AI-Assisted-Text-Classification-API"
+},
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.2.1",

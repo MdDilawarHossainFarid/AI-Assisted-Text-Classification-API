@@ -62,11 +62,11 @@ Content-Type: application/json
 ### Response
 ```
 {
-  "status": 200,
+  "success": true,
   "message": "Text classified successfully",
   "data": {
-    "category": "Complaint",
-    "confidence": 0.92,
+    "category": "Complaint",  
+    "confidence": 0.92
   }
 }
 ```

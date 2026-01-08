@@ -7,9 +7,14 @@ async function createClassify(req, res) {
     const classify = await ClassifyService.createClassifyText({
       text: req.body.text,
     });
-    return res.status(StatusCodes.CREATED).json({ 
-      response: classify.choices[0].message.content 
-    });
+    return res.status(StatusCodes.CREATED).json({
+  success: true,
+  message: "Text classified successfully",
+  data: {
+    category: classify.choices[0].message.content,
+    confidence: null,
+  }
+});
   } catch (error) {
      console.error('OpenAI Error:', error);
     res.status(500).json({ error: error.message });

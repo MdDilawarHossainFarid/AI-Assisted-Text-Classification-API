@@ -21,7 +21,7 @@ async function createClassifyText(text) {
         Important: The "text" field should contain the EXACT original text provided.`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: OpenAiConfig.OPENAI_MODEL,
       messages: [    {
       role: "system", 
       content: systemPrompt 

@@ -4,23 +4,31 @@ const { OpenAI } = require('openai');
 const openai = new OpenAI({apiKey: OpenAiConfig.APIKEY});
 
 async function createClassifyText(text) {
-    const prompt = `
-Classify the following text into ONE category only:
-- Complaint
-- Query
-- Feedback
-- Other
+    const systemPrompt =  `You are a classification assistant. Analyze the user's message and classify it.
+        Respond ONLY with valid JSON in this exact format:
+        {
+          "category": "complaint" OR "query" OR "feedback" OR "Other",
+          "confidence": 0.95,
+          "text": "${JSON.stringify(text)}"
+        }
+        
+        Classification guidelines:
+        - Complaint: User is reporting a problem or expressing dissatisfaction
+        - Query: User is asking a question or seeking information
+        - Feedback: User is providing suggestions or opinions (not complaints)
+        - Other: Doesn't fit the above categories
+        
+        Important: The "text" field should contain the EXACT original text provided.`;
 
-Text: "${text}"
-
-Respond with only the category name.
-`;
- 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0,
-      max_tokens: 100,
+      messages: [    {
+      role: "system", 
+      content: systemPrompt 
+    },{ role: "user", content: text }],
+      temperature: OpenAiConfig.TEMPERATURE,
+      max_tokens: OpenAiConfig.TOKENS,
+      response_format: { type: "json_object" }
     });
   return completion;
 }

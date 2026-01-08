@@ -62,9 +62,12 @@ Content-Type: application/json
 ### Response
 ```
 {
-  "category": "Complaint",
-  "confidence": 0.94,
-  "text": "The product arrived damaged and I want a refund"
+  "status": 200,
+  "message": "Text classified successfully",
+  "data": {
+    "category": "Complaint",
+    "confidence": 0.92,
+  }
 }
 ```
 ## 🤖 AI Implementation

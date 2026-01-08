@@ -20,9 +20,6 @@ A robust backend service that automatically classifies text input into predefine
 - [Installation](#installation)
 - [Environment Setup](#environment-setup)
 - [API Documentation](#api-documentation)
-- [AI Implementation](#ai-implementation-details)
-- [Usage Examples](#usage-examples)
-
 
 ## 📦 Installation
 
@@ -52,3 +49,44 @@ OPENAI_MAX_TOKENS=100
 
 OPENAI_TEMPERATURE=0.3
 ```
+## API Documentation
+### POST URL
+```
+http://localhost:3000/api/v1/classify/
+Content-Type: application/json
+```
+### Body
+```
+  "text": "The product arrived damaged and I want a refund"
+```
+### Response
+```
+{
+  "category": "Complaint",
+  "confidence": 0.94,
+  "text": "The product arrived damaged and I want a refund"
+}
+```
+## 🤖 AI Implementation
+
+### **How AI is Used**
+This project leverages **OpenAI's GPT models** to analyze and classify text input. The AI model examines the semantic meaning, context, and intent of the text to determine the most appropriate category.
+
+### **AI Model Details**
+- **Model**: GPT-3.5-turbo / GPT-4 (configurable)
+- **Provider**: OpenAI API
+- **Task**: Text classification / Intent detection
+- **Approach**: Few-shot learning with examples
+
+### **Classification Categories**
+The AI model classifies text into these categories:
+1. **Complaint** - Expressing dissatisfaction or problems
+2. **Query** - Asking for information or clarification  
+3. **Feedback** - Providing suggestions or opinions
+4. **Other** - Doesn't fit above categories
+
+### **AI Prompt Engineering**
+```javascript
+const systemPrompt = `You are a text classification assistant. 
+Classify the user's text into one of: Complaint, Query, Feedback, or Other.
+Respond only with the category name.`;
